@@ -1,9 +1,4 @@
-"""
-Domain-level exceptions for the lead qualification system.
 
-These exceptions are caught by the API error handlers and translated
-into appropriate HTTP responses. They should never crash the process.
-"""
 
 
 class LeadQualifierError(Exception):

@@ -28,6 +28,7 @@ router = APIRouter()
         "for an inbound lead. Returns a synchronous response."
     ),
 )
+
 async def receive_lead(
     payload: WebhookPayload,
     qualifier: LeadQualifierService = Depends(get_qualifier_service),

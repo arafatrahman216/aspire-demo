@@ -1,0 +1,31 @@
+PASS  Hot lead returns 200  POST /webhook (=200)
+PASS  Hot lead → qualified or qualified_fallback  
+PASS  Hot lead has lead_id (UUID)  
+PASS  Warm qualified lead returns 200  POST /webhook (=200)
+PASS  Warm lead → qualified or qualified_fallback  
+PASS  Low-context lead returns 200  POST /webhook (=200)
+PASS  Low-context → status=low_context  
+PASS  Low-context → priority_tier=Cold  
+PASS  Spam lead returns 200  POST /webhook (=200)
+PASS  Spam red flag detected  
+PASS  Missing required fields → 422  POST /webhook (=422)
+PASS  Invalid email format → 200 (rejected by business layer)  POST /webhook (=200)
+PASS  Invalid email → status=rejected  
+PASS  Invalid email → reason mentions email  
+PASS  Empty message → 200 (rejected)  POST /webhook (=200)
+PASS  Empty message → status=rejected  
+PASS  Whitespace-only message → 200 (rejected)  POST /webhook (=200)
+PASS  Whitespace msg → status=rejected  
+PASS  Whitespace email → 200  POST /webhook (=200)
+FAIL  Email normalized (trimmed + lowercased)  DB row email (expected=casey@uppercase.com, got=)
+PASS  GET /webhook → 405  wrong HTTP method (=405)
+FAIL  Persistence: 6f1ac103-9bc9-4bc5-a660-a5f30d6207df  expected=ai_complete, got=
+FAIL  Persistence: bbbc06e8-9e9a-4bbb-b8db-aff558674b30  expected=low_context, got=
+FAIL  Spam red flag persisted in JSON column  
+FAIL  Lead count ≥ 4  count=
+PASS  Brevo channel exercised  logged
+PASS  Slack channel exercised  logged
+PASS  Sheets sync absent → webhook still 200  graceful skip
+PASS  AI response status is qualified*  
+PASS  5 parallel webhook calls all return 200  no crashes
+FAIL  5 concurrent leads persisted  expected=5 got=

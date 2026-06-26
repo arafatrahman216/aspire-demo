@@ -20,6 +20,7 @@ class Settings(BaseSettings):
         env_file_encoding="utf-8",
         case_sensitive=False,
         frozen=True,
+        extra="ignore",  # tolerate leftover keys (e.g. MAILGUN_API_KEY from prior experiments)
     )
 
     # ── FastAPI ──────────────────────────────────────────
